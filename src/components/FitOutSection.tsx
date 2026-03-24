@@ -1,6 +1,7 @@
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Building2, ClipboardCheck, ShieldCheck, Wrench } from "lucide-react";
 
 const features = [
@@ -30,27 +31,45 @@ const features = [
   },
 ];
 
-const FitOutSection = () => (
-  <motion.section
-    id="fit-out"
-    className="relative py-28 bg-gradient-to-r from-[#020617] via-[#031526] to-[#020617] border-y border-cyan-500/10"
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, ease: "easeOut" }}
-    viewport={{ once: true }}
-  >
-    <div className="container mx-auto px-6 md:px-12 lg:px-20">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        <div className="max-w-xl">
+const FitOutSection = () => {
+  const ref = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.78", "center 0.5"],
+  });
+
+  const xLeftRaw = useTransform(scrollYProgress, [0, 1], [-110, 0]);
+  const xRightRaw = useTransform(scrollYProgress, [0, 1], [110, 0]);
+  const opacityLeftRaw = useTransform(scrollYProgress, [0, 0.55], [0, 1]);
+  const opacityRightRaw = useTransform(scrollYProgress, [0, 0.55], [0, 1]);
+  const scaleLeftRaw = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+  const scaleRightRaw = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+
+  const xLeft = useSpring(xLeftRaw, { stiffness: 90, damping: 24, mass: 0.7 });
+  const xRight = useSpring(xRightRaw, { stiffness: 90, damping: 24, mass: 0.7 });
+  const opacityLeft = useSpring(opacityLeftRaw, { stiffness: 70, damping: 20, mass: 0.8 });
+  const opacityRight = useSpring(opacityRightRaw, { stiffness: 70, damping: 20, mass: 0.8 });
+  const scaleLeft = useSpring(scaleLeftRaw, { stiffness: 100, damping: 24, mass: 0.7 });
+  const scaleRight = useSpring(scaleRightRaw, { stiffness: 100, damping: 24, mass: 0.7 });
+
+  return (
+    <section
+      id="fit-out"
+      ref={ref}
+      className="relative py-28 md:py-32 bg-gradient-to-r from-[#020617] via-[#031526] to-[#020617] border-y border-cyan-500/10 border-t border-white/5"
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <motion.div className="max-w-xl" style={{ x: xLeft, opacity: opacityLeft, scale: scaleLeft }}>
           <p className="text-sm font-semibold tracking-widest text-cyan-400 uppercase mb-4">
             OUR EXPERTISE
           </p>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
+          <h2 className="font-display text-4xl md:text-5xl font-bold leading-tight mb-8">
             <span className="text-foreground">Interior </span>
             <span className="text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.6)]">Fit-Out</span>
             <span className="text-foreground"> Solutions</span>
           </h2>
-          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+          <p className="text-gray-400 text-base sm:text-lg leading-relaxed">
             We deliver complete interior fit-out solutions for commercial, retail, and residential spaces. From
             concept to execution, our team ensures high-quality workmanship, cost efficiency, and compliance with
             all safety and building standards.
@@ -60,34 +79,15 @@ const FitOutSection = () => (
               <a href="#contact">Request Fit-Out Quote -&gt;</a>
             </Button>
           </motion.div>
-        </div>
+        </motion.div>
 
-        <div className="relative">
+          <motion.div className="relative" style={{ x: xRight, opacity: opacityRight, scale: scaleRight }}>
           <div className="pointer-events-none absolute -top-10 -right-8 w-72 h-72 bg-cyan-500/10 blur-3xl -z-10" />
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: 0.15,
-                },
-              },
-            }}
-          >
+          <div className="pointer-events-none absolute bottom-0 left-0 w-72 h-72 bg-blue-500/10 blur-3xl -z-10" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
             {features.map(({ icon: Icon, title, description }) => (
-              <motion.div
-                key={title}
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              >
-                <Card className="glass h-full group border border-cyan-500/20 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/10 hover:border-cyan-400/40 transition-all duration-300">
+              <div key={title}>
+                <Card className="glass h-full group border border-cyan-500/20 hover:-translate-y-2 hover:shadow-xl hover:shadow-cyan-500/20 hover:border-cyan-400/40 transition-all duration-300">
                   <CardHeader className="h-full">
                     <motion.div
                       className="w-11 h-11 rounded-lg bg-cyan-500/10 p-3 flex items-center justify-center mb-3 transition-colors group-hover:bg-cyan-500/20"
@@ -97,16 +97,17 @@ const FitOutSection = () => (
                       <Icon className="w-5 h-5 text-cyan-400 transition-colors group-hover:text-cyan-300" />
                     </motion.div>
                     <CardTitle className="font-display text-lg">{title}</CardTitle>
-                    <CardDescription className="leading-relaxed">{description}</CardDescription>
+                    <CardDescription className="leading-relaxed text-gray-400">{description}</CardDescription>
                   </CardHeader>
                 </Card>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
+        </motion.div>
         </div>
       </div>
-    </div>
-  </motion.section>
-);
+    </section>
+  );
+};
 
 export default FitOutSection;
