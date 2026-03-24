@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const steps = [
   { num: "01", title: "Consultation", desc: "We review project goals, site requirements, and technical scope." },
   { num: "02", title: "Site Assessment", desc: "Our team surveys conditions and defines an actionable work strategy." },
@@ -7,8 +9,15 @@ const steps = [
 ];
 
 const Process = () => (
-  <section id="process" className="py-24">
-    <div className="container mx-auto px-4">
+  <motion.section
+    id="process"
+    className="py-24"
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+    viewport={{ once: true }}
+  >
+    <div className="container mx-auto px-6 md:px-12 lg:px-20">
       <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-12">
         Our <span className="text-gradient-cyan">Process</span>
       </h2>
@@ -30,7 +39,7 @@ const Process = () => (
         ))}
       </div>
     </div>
-  </section>
+  </motion.section>
 );
 
 export default Process;

@@ -1,6 +1,6 @@
 const Footer = () => (
   <footer className="border-t border-border py-8">
-    <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground text-center sm:text-left">
+    <div className="container mx-auto px-6 md:px-12 lg:px-20 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground text-center sm:text-left">
       <span className="font-display font-bold text-lg text-gradient-cyan">VISIONARY.</span>
       <span>© {new Date().getFullYear()} Visionary Building Maintenance &amp; Fit-Out (VBM). All rights reserved.</span>
       <a href="mailto:projects@vbm.qa" className="text-primary hover:underline">

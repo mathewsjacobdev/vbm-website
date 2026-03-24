@@ -1,4 +1,5 @@
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { motion } from "framer-motion";
 import { Users, Clock, ShieldCheck, Headphones, BadgeDollarSign, Layers } from "lucide-react";
 
 const features = [
@@ -11,27 +12,34 @@ const features = [
 ];
 
 const WhyUs = () => (
-  <section id="why-us" className="py-24 bg-muted/30">
-    <div className="container mx-auto px-4">
+  <motion.section
+    id="why-us"
+    className="py-24 bg-muted/30"
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+    viewport={{ once: true }}
+  >
+    <div className="container mx-auto px-6 md:px-12 lg:px-20">
       <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-12">
         Why Choose <span className="text-gradient-cyan">Us</span>
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {features.map(({ icon: Icon, title, desc }) => (
-          <Card key={title} className="glass group hover:border-primary/50 transition-all duration-300 text-center">
-            <CardHeader className="items-center">
-              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors">
+          <Card key={title} className="glass group h-full hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 hover:border-primary/50 transition-all duration-300 text-center">
+            <CardHeader className="items-center h-full">
+              <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }} className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors">
                 <Icon className="w-7 h-7 text-primary" />
-              </div>
+              </motion.div>
               <CardTitle className="font-display text-lg">{title}</CardTitle>
-              <CardDescription>{desc}</CardDescription>
+              <CardDescription className="leading-relaxed">{desc}</CardDescription>
             </CardHeader>
           </Card>
         ))}
       </div>
     </div>
-  </section>
+  </motion.section>
 );
 
 export default WhyUs;

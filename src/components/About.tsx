@@ -1,4 +1,5 @@
 import { CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
 
 const points = [
   "Experienced teams for fit-out, MEP, and maintenance delivery",
@@ -9,8 +10,15 @@ const points = [
 ];
 
 const About = () => (
-  <section id="about" className="py-24">
-    <div className="container mx-auto px-4">
+  <motion.section
+    id="about"
+    className="py-24"
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+    viewport={{ once: true }}
+  >
+    <div className="container mx-auto px-6 md:px-12 lg:px-20">
       <div className="max-w-3xl mx-auto">
         <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
           Built on <span className="text-gradient-cyan">Trust</span>
@@ -31,7 +39,7 @@ const About = () => (
         </ul>
       </div>
     </div>
-  </section>
+  </motion.section>
 );
 
 export default About;
