@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -17,8 +18,15 @@ const AiAssist = () => {
   };
 
   return (
-    <section id="ai-assist" className="py-24 bg-muted/30">
-      <div className="container mx-auto px-4 text-center">
+    <motion.section
+      id="ai-assist"
+      className="py-24 bg-card/40 border-y border-border/60"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: true }}
+    >
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 text-center">
         <div className="max-w-xl mx-auto">
           <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 animate-pulse-glow">
             <Sparkles className="w-8 h-8 text-primary" />
@@ -28,7 +36,7 @@ const AiAssist = () => {
             AI Assist <span className="text-gradient-cyan">Design & Build</span>
           </h2>
 
-          <span className="inline-block mt-2 px-4 py-1 rounded-full text-sm font-semibold bg-secondary/20 text-secondary border border-secondary/30">
+          <span className="inline-block mt-3 px-4 py-1 rounded-full text-sm font-semibold bg-secondary/20 text-secondary border border-secondary/40">
             Coming Soon
           </span>
 
@@ -37,20 +45,22 @@ const AiAssist = () => {
             and maintenance decision support for faster project delivery.
           </p>
 
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+          <form onSubmit={handleSubmit} className="mt-1 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <Input
               type="email"
               placeholder="Enter your work email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="flex-1 bg-background border-border"
+              className="flex-1 h-11 bg-background/90 border-border focus-visible:ring-primary focus-visible:ring-offset-0"
             />
-            <Button variant="cyan" type="submit">Notify Me</Button>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.2 }}>
+              <Button variant="cyan" type="submit" className="h-11 px-6">Notify Me</Button>
+            </motion.div>
           </form>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
