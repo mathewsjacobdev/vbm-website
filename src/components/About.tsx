@@ -2,11 +2,11 @@ import { CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
 const points = [
-  "Experienced teams for fit-out, MEP, and maintenance delivery",
+  "Experienced teams for Fit-Out, MEP and Maintenance delivery",
   "Clear communication and dependable project coordination",
-  "Strict quality, safety, and compliance standards",
+  "Strict quality, Safety and Compliance standards",
   "Scalable support from single-site to multi-site operations",
-  "Long-term value through practical, efficient solutions",
+  "Long-term value through practical, Efficient solutions",
 ];
 
 const About = () => (
@@ -31,8 +31,8 @@ const About = () => (
             Built on <span className="text-gradient-cyan">Trust</span>
           </h2>
           <p className="text-gray-400 leading-relaxed mt-4 text-lg">
-            Visionary Building Maintenance &amp; Fit-Out (VBM) supports clients across Lusail and Doha with
-            practical, high-quality construction and maintenance services. From interior fit-outs to planned and
+            Visionary Building Maintenance &amp; Fit-Out (VBM) supports clients across Qatar with
+            practical, High-quality construction and Maintenance services. From interior fit-outs to planned and
             reactive maintenance, we focus on safe execution, reliable timelines, and measurable project outcomes.
           </p>
 

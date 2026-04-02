@@ -70,10 +70,11 @@ const FitOutSection = () => {
             <span className="text-foreground"> Solutions</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg leading-relaxed">
-            We deliver complete interior fit-out solutions for commercial, retail, and residential spaces. From
-            concept to execution, our team ensures high-quality workmanship, cost efficiency, and compliance with
-            all safety and building standards.
+             We deliver complete interior fit-out solutions for Commercial, Retail and Residential spaces. From
+  concept to execution, Our team ensures high-quality workmanship, Cost efficiency, and Compliance with
+  all safety and building standards.
           </p>
+          
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.2 }}>
             <Button variant="cyan" size="lg" className="mt-8" asChild>
               <a href="#contact">Request Fit-Out Quote -&gt;</a>
