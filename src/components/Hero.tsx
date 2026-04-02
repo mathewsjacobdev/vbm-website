@@ -30,21 +30,21 @@ const floatingTags = [
     duration: 0.7,
   },
   {
-    label: "Planned Maintenance",
+    label: "Building Maintenance",
     positionClass: "top-16 right-2",
     initial: { opacity: 0, x: 30, y: -30 },
     delay: 0.25,
     duration: 0.75,
   },
   {
-    label: "Reactive Maintenance",
+    label: "MEP Works",
     positionClass: "bottom-24 left-4",
     initial: { opacity: 0, x: -30, y: 30 },
     delay: 0.4,
     duration: 0.8,
   },
   {
-    label: "MEP & Facility Management",
+    label: "Refurbishment",
     positionClass: "bottom-20 right-4",
     initial: { opacity: 0, x: 30, y: 30 },
     delay: 0.55,
@@ -120,7 +120,7 @@ const Hero = () => (
         animate="visible"
         transition={{ duration: 1.1, ease: "easeOut", delay: 0.6 }}
       >
-        Trusted execution across Lusail and Doha
+        Trusted execution across Qatar
       </motion.div>
 
       <div className="pointer-events-none absolute inset-0 hidden md:block">

@@ -4,11 +4,9 @@ import { Wrench, CalendarCheck, Zap, Settings, RefreshCcw, Building } from "luci
 
 const services = [
   { icon: Building, title: "Interior Fit-Out", desc: "End-to-end interior fit-out execution for offices, retail spaces, and residential properties." },
-  { icon: CalendarCheck, title: "Planned Maintenance", desc: "Preventive maintenance programs that reduce downtime and protect building assets." },
-  { icon: Zap, title: "Reactive Maintenance", desc: "Fast-response corrective maintenance for urgent breakdowns and operational disruptions." },
+  { icon: CalendarCheck, title: "Building Maintenance", desc: "Comprehensive planned and reactive building maintenance for safety, uptime, and asset longevity." },
   { icon: Settings, title: "MEP Works", desc: "Professional mechanical, electrical, and plumbing installation, upgrades, and support." },
   { icon: RefreshCcw, title: "Refurbishment", desc: "Targeted refurbishment works that modernize existing spaces with minimal interruption." },
-  { icon: Wrench, title: "Facility Management", desc: "Integrated facility management services to maintain safety, efficiency, and performance." },
 ];
 
 const Services = () => (
