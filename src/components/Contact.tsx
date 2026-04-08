@@ -4,14 +4,35 @@ import { Textarea } from "@/components/ui/textarea";
 import { motion } from "framer-motion";
 import { MapPin, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "emailjs-com";
 
 const Contact = () => {
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast({ title: "Message sent!", description: "We'll get back to you shortly." });
-    (e.target as HTMLFormElement).reset();
+
+    emailjs
+      .sendForm(
+        "service_4chrexv",
+        "template_wxioaxs",
+        e.currentTarget,
+        "rbD6VPTAST0u68C1t"
+      )
+      .then(() => {
+        toast({
+          title: "Message sent!",
+          description: "We'll get back to you shortly.",
+        });
+      })
+      .catch(() => {
+        toast({
+          title: "Error",
+          description: "Failed to send message",
+        });
+      });
+
+    e.currentTarget.reset();
   };
 
   return (
@@ -57,21 +78,21 @@ const Contact = () => {
           <form onSubmit={handleSubmit} className="glass rounded-2xl p-7 sm:p-9 space-y-7">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: "easeOut" }} viewport={{ once: true }}>
-                <Input placeholder="First Name" required className="bg-background border-border h-11 focus-visible:ring-primary focus-visible:ring-offset-0" />
+                <Input name="name" placeholder="First Name" required className="bg-background border-border h-11 focus-visible:ring-primary focus-visible:ring-offset-0" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }} viewport={{ once: true }}>
                 <Input placeholder="Last Name" required className="bg-background border-border h-11 focus-visible:ring-primary focus-visible:ring-offset-0" />
               </motion.div>
             </div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }} viewport={{ once: true }}>
-              <Input type="email" placeholder="Email" required className="bg-background border-border h-11 focus-visible:ring-primary focus-visible:ring-offset-0" />
+              <Input name="email" type="email" placeholder="Email" required className="bg-background border-border h-11 focus-visible:ring-primary focus-visible:ring-offset-0" />
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }} viewport={{ once: true }}>
-              <Input type="tel" placeholder="Phone" required className="bg-background border-border h-11 focus-visible:ring-primary focus-visible:ring-offset-0" />
+              <Input name="phone" type="tel" placeholder="Phone" required className="bg-background border-border h-11 focus-visible:ring-primary focus-visible:ring-offset-0" />
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }} viewport={{ once: true }}>
-              <Textarea placeholder="Message" rows={5} required className="bg-background border-border focus-visible:ring-primary focus-visible:ring-offset-0" />
+              <Textarea name="message" placeholder="Message" rows={5} required className="bg-background border-border focus-visible:ring-primary focus-visible:ring-offset-0" />
             </motion.div>
 
             <motion.div
